@@ -2,6 +2,12 @@
 
 A production-ready, AI-powered product recommendation chatbot built with Flask, LangChain, and deployed on Kubernetes with comprehensive monitoring.
 
+## 🎬 Live Demo
+
+![Product Recommendation System Demo](demo.gif)
+
+*Watch the live demo above to see the AI Product Assistant in action!*
+
 ## 🌟 Features
 
 ### 🤖 AI-Powered Chatbot

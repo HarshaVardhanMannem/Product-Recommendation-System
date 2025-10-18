@@ -2,6 +2,7 @@ from flask import render_template,Flask,request,Response
 from prometheus_client import Counter,generate_latest
 from src.data_ingestion import DataIngestor
 from src.rag_chain import RAGChainBuilder
+from src.response_formatter import format_llm_response
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -22,15 +23,18 @@ def create_app():
     
     @app.route("/get" , methods=["POST"])
     def get_response():
-
         user_input = request.form["msg"]
 
-        reponse = rag_chain.invoke(
+        # Get response from RAG chain
+        raw_response = rag_chain.invoke(
             {"input" : user_input},
             config={"configurable" : {"session_id" : "user-session"}}
         )["answer"]
 
-        return reponse
+        # Format the response with styling
+        styled_response = format_llm_response(raw_response)
+
+        return styled_response
     
     @app.route("/metrics")
     def metrics():
