@@ -224,11 +224,6 @@ The system uses the following models (configurable in `src/config.py`):
 
 ## 🎯 Usage Examples
 
-### Live Demo
-![Product Recommendation System Demo](demo.gif)
-
-*Watch the live demo above to see the AI Product Assistant in action!*
-
 ### Chat Interface
 1. Open the web interface
 2. Type your product-related questions
