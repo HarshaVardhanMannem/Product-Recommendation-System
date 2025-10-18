@@ -1,4 +1,4 @@
-# 🛍️ Product Recommendation System
+# 🛍️ AI Product Recommendation System
 
 A production-ready, AI-powered product recommendation chatbot built with Flask, LangChain, and deployed on Kubernetes with comprehensive monitoring.
 
@@ -7,14 +7,15 @@ A production-ready, AI-powered product recommendation chatbot built with Flask, 
 ### 🤖 AI-Powered Chatbot
 - **RAG (Retrieval-Augmented Generation)** implementation using LangChain
 - **Conversational AI** with chat history and context awareness
-- **Product-specific recommendations** based on Flipkart product reviews
+- **Product-specific recommendations** based on product reviews and data
+- **Styled responses** with automatic formatting and visual enhancement
 - **Real-time responses** with session management
 
 ### 🏗️ Architecture & Tech Stack
 - **Backend**: Flask (Python 3.10)
 - **AI/ML**: LangChain, HuggingFace Embeddings, Groq LLM
 - **Vector Database**: AstraDB (DataStax)
-- **Frontend**: Bootstrap 4, jQuery, Custom CSS
+- **Frontend**: Bootstrap 5, jQuery, Custom CSS with Glass-morphism design
 - **Containerization**: Docker
 - **Orchestration**: Kubernetes
 - **Monitoring**: Prometheus + Grafana
@@ -47,7 +48,8 @@ Product Recommendation System/
 │   ├── config.py                  # Configuration management
 │   ├── data_ingestion.py          # Vector store setup
 │   ├── data_converter.py          # CSV to document conversion
-│   └── rag_chain.py               # RAG chain implementation
+│   ├── rag_chain.py               # RAG chain implementation
+│   └── response_formatter.py      # LLM response styling and formatting
 ├── utils/                         # Utility modules
 │   ├── custom_exception.py        # Custom exception handling
 │   └── logger.py                  # Logging configuration
@@ -56,7 +58,7 @@ Product Recommendation System/
 ├── static/                        # Static assets
 │   └── style.css                  # Custom styling
 ├── data/                          # Data files
-│   └── flipkart_product_review.csv # Product review dataset
+│   └── product_reviews.csv        # Product review dataset
 ├── prometheus/                    # Monitoring configuration
 │   ├── prometheus-configmap.yaml  # Prometheus config
 │   └── prometheus-deployment.yaml # Prometheus deployment
@@ -209,23 +211,30 @@ The system uses the following models (configurable in `src/config.py`):
 ### API Endpoints
 - `POST /get` - Send message to chatbot
   - **Input**: `msg` (form data)
-  - **Output**: AI response text
+  - **Output**: Styled HTML response with automatic formatting
 
 ### Monitoring
 - `GET /metrics` - Prometheus metrics endpoint
 
 ## 🎯 Usage Examples
 
+### Live Demo
+![Product Recommendation System Demo](demo.gif)
+
+*Watch the live demo above to see the AI Product Assistant in action!*
+
 ### Chat Interface
 1. Open the web interface
 2. Type your product-related questions
-3. Get AI-powered recommendations based on product reviews
+3. Get AI-powered recommendations based on product reviews and data
 
 ### Example Queries
-- "What are the best smartphones under 20000?"
+- "What are the best smartphones under $500?"
 - "Tell me about laptop reviews"
 - "Which headphones have good sound quality?"
-- "Compare different mobile brands"
+- "Compare gaming laptops vs business laptops"
+- "Recommend products for students"
+- "Best budget smartphones with good cameras"
 
 ## 🔍 Monitoring & Observability
 
