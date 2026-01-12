@@ -41,6 +41,54 @@ A production-ready, AI-powered product recommendation chatbot built with Flask, 
 - **Secret management** for API keys
 - **Modular code structure** for maintainability
 
+## 🏛️ System Architecture
+
+![AI Product Recommendation System Architecture](architecture_diagram.png)
+
+### Architecture Overview
+
+The system follows a modern, layered architecture designed for scalability, maintainability, and production readiness:
+
+#### **User Layer**
+- Web-based chat interface accessible through any modern browser
+- Real-time interaction with the AI assistant
+
+#### **Application Layer**
+- **Flask Web Application**: Lightweight Python web framework serving the frontend and API
+  - `GET /` - Renders the chat interface
+  - `POST /get` - Processes user queries and returns AI-generated responses
+  - `GET /metrics` - Exposes Prometheus metrics for monitoring
+
+#### **AI/ML Processing Layer (RAG Pipeline)**
+- **RAG Chain Builder**: Orchestrates the entire retrieval-augmented generation workflow
+  - **History-Aware Retriever**: Contextualizes queries using conversation history
+  - **Question Answer Chain**: Combines retrieved context with LLM reasoning
+  - **Chat Message History Store**: Maintains conversation state per session
+  - **Groq LLM**: Fast inference using `llama-3.1-8b-instant` model
+  - **Response Formatter**: Styles and structures LLM outputs for optimal UX
+
+#### **Data Layer**
+- **Data Ingestion Module**: Processes product review datasets
+- **CSV Data Converter**: Transforms raw CSV data into document format
+- **HuggingFace Embeddings**: Generates semantic embeddings using `BAAI/bge-base-en-v1.5`
+- **AstraDB Vector Store**: Cloud-native vector database for similarity search
+
+#### **Infrastructure Layer**
+- **Docker**: Containerization for consistent deployment across environments
+- **Kubernetes**: Container orchestration for scaling and reliability
+- **Prometheus**: Metrics collection and alerting
+- **Grafana**: Dashboard visualization and monitoring
+
+### Data Flow
+
+1. **User Query** → Flask receives the request via `/get` endpoint
+2. **RAG Processing** → Query is processed through the RAG chain with conversation history
+3. **Vector Retrieval** → Semantic search retrieves top 3 relevant product reviews from AstraDB
+4. **LLM Generation** → Groq LLM generates contextual response using retrieved documents
+5. **Response Formatting** → Response is styled and formatted for rich display
+6. **User Response** → Formatted response is returned to the user interface
+7. **Metrics Collection** → All requests are tracked and exported to Prometheus
+
 ## 📁 Project Structure
 
 ```
